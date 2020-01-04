@@ -6,5 +6,5 @@ $db_database = 'foodshala';
 
 $db_user = 'root';
 
-$db_pass = '';
+$db_pass = '1234';
 ?>
