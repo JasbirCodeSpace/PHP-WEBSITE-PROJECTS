@@ -17,6 +17,7 @@ $(document).ready(function(){
       return true;
     }
   }
+  // Specify ids on which we are going to prevent paste event
   var idsCopyPaste = ['credt_abb','lastnetprofit'];
   for (var i = 0; i < idsCopyPaste.length; i++) {
     disablePaste(document.getElementById(idsCopyPaste[i]));
