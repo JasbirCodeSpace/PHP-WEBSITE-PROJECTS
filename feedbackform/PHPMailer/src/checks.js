@@ -22,6 +22,16 @@ $(document).ready(function(){
     disablePaste(document.getElementById(idsCopyPaste[i]));
   }
 
+  var idsUpperCase = ['pan'];
+
+  for (var i = 0; i < idsUpperCase.length; i++) {
+    toUpperCase(idsUpperCase[i]);
+  }
+
+  function toUpperCase(id){
+      $('#'+id).css('text-transform','uppercase');
+  }
+  
 
   function isNumberKey(evt)
   {
