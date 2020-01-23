@@ -64,7 +64,7 @@ $(document).ready(function(){
     return true;
   }
 
-
+// Method for preventing input to fixed length
   function isLimitedLength(evt,obj,type,len){
     var charCode = (evt.which) ? evt.which : evt.keyCode;
     var value = obj.value;
