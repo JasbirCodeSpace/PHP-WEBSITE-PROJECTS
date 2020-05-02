@@ -410,7 +410,7 @@
                         <div class="form-column col-md-6">
                             <div class="contact-form">
                                 <!--Title-->
-                                <form class="form_class">
+                                <form class="form_class" method="POST">
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
@@ -430,7 +430,7 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <select class="form_inputs" name="countryCode" id="">
-                                                    <option data-countryCode="GB" value="44" Selected>UK (+44)</option>
+                                                    <option data-countryCode="GB" value="44">UK (+44)</option>
                                                     <option data-countryCode="US" value="1">USA (+1)</option>
                                                     <option data-countryCode="DZ" value="213">Algeria (+213)</option>
                                                     <option data-countryCode="AD" value="376">Andorra (+376)</option>
@@ -517,7 +517,7 @@
                                                     <option data-countryCode="HK" value="852">Hong Kong (+852)</option>
                                                     <option data-countryCode="HU" value="36">Hungary (+36)</option>
                                                     <option data-countryCode="IS" value="354">Iceland (+354)</option>
-                                                    <option data-countryCode="IN" value="91">India (+91)</option>
+                                                    <option data-countryCode="IN" value="91" selected>India (+91)</option>
                                                     <option data-countryCode="ID" value="62">Indonesia (+62)</option>
                                                     <option data-countryCode="IR" value="98">Iran (+98)</option>
                                                     <option data-countryCode="IQ" value="964">Iraq (+964)</option>
@@ -667,8 +667,7 @@
                                     </div>
                                     <div class="col-sm-12 no-padding">
                                         <div class="button">
-                                            <a href="#." class="btn btn-blue btn-rounded btn-large text-extra-small width-100">Get
-                                            Started</a>
+                                            <input type="submit"  class="btn btn-blue btn-rounded btn-large text-extra-small width-100">
                                         </div>
                                     </div>
                                 </form>
@@ -739,5 +738,6 @@
         <script src="js/map.js"></script>
         <!-- setting -->
         <script src="js/main.js"></script>
+        <script src="js/register.js"></script>
     </body>
 </html>
