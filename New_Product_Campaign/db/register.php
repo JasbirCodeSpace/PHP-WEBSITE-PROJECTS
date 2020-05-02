@@ -1,21 +1,33 @@
 <?php
 require('connection.php');
+require 'encrypt_decrypt.php';
 
 $data = $_POST['formData'];
 $fname = $con->real_escape_string($data['fname']);
 $lname = $con->real_escape_string($data['lname']);
 $email = $con->real_escape_string($data['email']);
 $phone = $con->real_escape_string($data['phone']);
-$password = $con->real_escape_string($data['pswrd1']);
 
+$query = "SELECT * FROM `user` WHERE email = '$email'";
+$result = $con->query($query);
+if (!$result) {
+	$sharelink = my_encrypt($email);
 $query = "INSERT INTO `user`(firstName,lastName,email,phone,password) VALUES('$fname','$lname','$email','$phone','$password')";
 $result = $con->query($query);
 $json = '';
 if ($result) {
 	$json = array('status'=>true,'msg'=>'Successfully registered');
+
+	$query = "UPDATE `user` SET count = count + 1 WHERE id = {$_SESSION['refferd_id']}";
+	$con->query($query);
 }else{
-	$json =  array('status'=>false,'msg'=>$con->error);
+	$json =  array('status'=>false,'msg'=>"Error while registration");
 }
+}else{
+	$json = json_encode(array('status'=>false,'msg'=>'Given email already registered'));
+}
+
+
 $con->close();;
 echo json_encode($json);
 exit;
