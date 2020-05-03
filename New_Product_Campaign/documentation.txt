@@ -1,0 +1,32 @@
+
+php and html files in root directory:
+
+comingsoon.html - will be shown on website for first 3 months till the launch of HoneyMint
+
+index.php - will be shown on the website for 1 month for users to register and share link
+
+sendMail.php - is used to send  mail to user after successfull registration
+
+sendMailToWinners.php - has to be executed to send mail to top 10 winners after 1 month for further instructions
+
+displayWinners.php - display top 10 entries to client
+
+emailTemplate.php - html email template for successfull registration
+
+winnerEmailTemlate.php - html email template for winners
+
+user.sql - setup this sql for accessing database
+
+=============================================================================================================
+phpmailer:
+
+for sending email I am using gmail smtp . for making it to work you have to enable this https://myaccount.google.com/lesssecureapps
+
+and specify gmail account and password in config.php file inside php_mailer
+=============================================================================================================
+
+db :
+this directory contains database connection details, register.php and encrypt php files for link
+
+
+
