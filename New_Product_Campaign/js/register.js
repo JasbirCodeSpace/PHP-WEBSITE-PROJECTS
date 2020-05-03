@@ -1,4 +1,12 @@
 $(document).ready(function(){
+$('.participate').click(function(){
+	console.log('here')
+    document.getElementById('participate-section').scrollIntoView({ block: 'end',  behavior: 'smooth' });
+})
+$('.details').click(function(){
+    document.getElementById('details-section').scrollIntoView({ block: 'end',  behavior: 'smooth' });
+})
+
 
 $('input').attr('required','required');
 
@@ -15,10 +23,31 @@ $('form').on('submit',function(e){
 		'url':'db/register.php',
 		'data':{'formData':data},
 		'success':function(data){
-			console.log(JSON.parse(data))
+			data = JSON.parse(data);
+			if(data.status==true){
+					Swal.fire({
+					  title:'Good job!',
+					  text:'Check your mail for further instructions',
+					  icon:'success',
+					  closeOnConfirm:true,
+
+					})
+			}else{
+				Swal.fire({
+					  title:'Error!',
+					  text:'Something went wrong',
+					  icon:'error',
+					  closeOnConfirm:true,
+					})
+			}
 		},
 		'error':function(data){
-			console.log(JSON.parse(data))
+				Swal.fire({
+					  title:'Error!',
+					  text:'Something went wrong',
+					  icon:'error',
+					  closeOnConfirm:true,
+					})
 		}
 	})
 })
