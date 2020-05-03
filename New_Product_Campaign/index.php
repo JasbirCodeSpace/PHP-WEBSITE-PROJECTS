@@ -1,5 +1,20 @@
 <?php
-    require('db/connection.php');
+    session_start();
+    error_reporting(0);
+    require 'db/connection.php';
+    require 'db/encrypt_decrypt.php';
+    if (isset($_GET['id'])) {
+        // $reffered_id = my_decrypt(trim(urldecode($_GET['id'])));
+        $reffered_id = trim(urldecode($_GET['id']));
+        $query = "SELECT * from `user` WHERE link = '$reffered_id'";
+        $result = $con->query($query);
+        $result = mysqli_fetch_array($result);
+        $_SESSION['reffered_id'] = $result['id'];
+    
+    }else{
+        $_SESSION['reffered_id'] = -1;
+    }
+    $_SESSION['honeymint_home'] = $_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
     ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -49,7 +64,7 @@
         </div>
         <!-- start slider -->
         <section class="no-padding no-transition" id="home">
-            <h1 class="display-none" aria-hidden="true">boltex</h1>
+            <h1 class="display-none" aria-hidden="true">HoneyMint</h1>
             <div id="revo_main_wrapper" class="rev_slider_wrapper fullwidthbanner-container">
                 <div id="banner-main" class="rev_slider fullwidthabanner" style="display:none;" data-version="5.4.1">
                     <ul>
@@ -68,7 +83,7 @@
                                 data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
                                 data-start="1200" data-splitin="none" data-splitout="none">
-                                <h2 class="text-white font-weight-700 alt-font">Our Creative</h2>
+                                <h2 class="text-white font-weight-700 alt-font">HoneyMint</h2>
                             </div>
                             <div class="tp-caption tp-resizeme"
                                 data-x="['right','right','right','center']" data-hoffset="['0','0','0','0']"
@@ -80,20 +95,7 @@
                                 data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;"
                                 data-transform_out="s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
                                 data-start="1000" data-splitin="none" data-splitout="none">
-                                <h2 class="text-white font-weight-100 alt-font">Onepage Website</h2>
-                            </div>
-                            <div class="tp-caption tp-resizeme whitecolor"
-                                data-x="['right','right','right','center']" data-hoffset="['0','0','0','0']"
-                                data-y="['middle','middle','middle','middle']" data-voffset="['70','70','70','70']"
-                                data-whitespace="nowrap" data-responsive_offset="on"
-                                data-width="['none','none','none','none']" data-type="text"
-                                data-textalign="['right','right','right','center']" data-fontsize="['24','24','20','20']"
-                                data-transform_idle="o:1;"
-                                data-transform_in="z:0;rX:0deg;rY:0;rZ:0;sX:2;sY:2;skX:0;skY:0;opacity:0;s:1000;e:Power2.easeOut;"
-                                data-transform_out="s:1000;e:Power3.easeInOut;s:1000;e:Power3.easeInOut;"
-                                data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
-                                data-start="1500" data-splitin="none" data-splitout="none">
-                                <p class="text-white font-weight-300 text-large">The Best Multipurpose One Page Template in Market</p>
+                                <h2 class="text-white font-weight-100 alt-font">Marathon</h2>
                             </div>
                             <div class="tp-caption tp-resizeme"
                                 data-x="['right','right','right','center']" data-hoffset="['0','0','0','0']"
@@ -101,10 +103,9 @@
                                 data-whitespace="nowrap" data-transform_idle="o:1;" data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:1500;e:Power4.easeInOut;"
                                 data-transform_out="s:900;e:Power2.easeInOut;s:900;e:Power2.easeInOut;"
                                 data-type="button" data-start="2000" data-splitin="none" data-splitout="none" data-responsive_offset="on">
-                                <a href="#." class="btn btn-blue btn-hvr-white btn-rounded btn-large margin-5px-right">Learn More</a>
-                                <a href="#." class="btn btn-transparent-white btn-rounded btn-large">Contact Us</a>
+                                <a class="btn btn-blue btn-hvr-white btn-rounded btn-large margin-5px-right participate">Participate</a>
+                                <a class="btn btn-transparent-white btn-rounded btn-large details">Details</a>
                             </div>
-
                         </li>
                         <!-- SLIDE  -->
                         <li data-index="rs-02" data-transition="fade" data-slotamount="default" data-easein="Power3.easeInOut" data-easeout="Power3.easeInOut" data-masterspeed="2000" data-fsmasterspeed="1500" class="rev_gradient">
@@ -122,7 +123,7 @@
                                 data-transform_in="x:-50px;opacity:0;s:2000;e:Power3.easeOut;"
                                 data-transform_out="s:1000;e:Power3.easeInOut;s:1000;e:Power3.easeInOut;"
                                 data-start="1000" data-splitin="none" data-splitout="none">
-                                <h2 class="text-white font-weight-100 alt-font">Imagination</h2>
+                                <h2 class="text-white font-weight-100 alt-font">Participate</h2>
                             </div>
                             <div class="tp-caption tp-resizeme"
                                 data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
@@ -132,7 +133,7 @@
                                 data-textalign="['center','center','center','center']"
                                 data-transform_idle="o:1;" data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;" data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;" data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
                                 data-start="1200" data-splitin="none" data-splitout="none">
-                                <h2 class="text-white alt-font font-weight-700">Is The Beginning</h2>
+                                <h2 class="text-white alt-font font-weight-700">&</h2>
                             </div>
                             <div class="tp-caption tp-resizeme"
                                 data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
@@ -144,7 +145,7 @@
                                 data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;"
                                 data-transform_out="s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
                                 data-start="1000" data-splitin="none" data-splitout="none">
-                                <h2 class="text-white font-weight-100 alt-font">Of Creation</h2>
+                                <h2 class="text-white font-weight-100 alt-font">Win</h2>
                             </div>
                             <div class="tp-caption tp-resizeme whitecolor"
                                 data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
@@ -157,7 +158,7 @@
                                 data-transform_out="s:1000;e:Power3.easeInOut;s:1000;e:Power3.easeInOut;"
                                 data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
                                 data-start="1500" data-splitin="none" data-splitout="none">
-                                <p class="text-white text-large font-weight-300">The Best Multipurpose One Page Template in Market</p>
+                                <p class="text-white text-large font-weight-200">100 bottles of HoneyMint</p>
                             </div>
                             <div class="tp-caption tp-resizeme"
                                 data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
@@ -170,7 +171,7 @@
                                 data-marginbottom="[0,0,0,0]" data-marginleft="[0,0,0,0]"
                                 data-frames='[{"delay":700,"speed":2000,"frame":"0","from":"sX:1;sY:1;opacity:0;fb:40px;","to":"o:1;fb:0;","ease":"Power4.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"200","ease":"Linear.easeNone","to":"o:1;rX:0;rY:0;rZ:0;z:0;fb:0;"}]'
                                 style=" box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;">
-                                <a href="#." class="btn btn-blue btn-rounded btn-large">Learn More</a>
+                                <a class="btn btn-blue btn-hvr-white btn-rounded btn-large margin-5px-right participate">Participate</a>
                             </div>
                         </li>
                         <!-- SLIDE 2  -->
@@ -197,7 +198,7 @@
                                 data-textalign="['left','left','left','center']"
                                 data-transform_idle="o:1;" data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;" data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;" data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
                                 data-start="1200" data-splitin="none" data-splitout="none">
-                                <h2 class="text-white font-weight-700 alt-font">Video Background </h2>
+                                <h2 class="text-white font-weight-700 alt-font">Register, Share & Win</h2>
                             </div>
                             <div class="tp-caption tp-resizeme whitecolor"
                                 data-x="['left','left','left','center']" data-hoffset="['0','50','0','0']"
@@ -210,7 +211,7 @@
                                 data-transform_out="s:1000;e:Power3.easeInOut;s:1000;e:Power3.easeInOut;"
                                 data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
                                 data-start="1500" data-splitin="none" data-splitout="none">
-                                <p class="text-white text-large font-weight-300">The Best Multipurpose One Page Template in Market</p>
+                                <p class="text-white text-large font-weight-300">100 bottles of HoneyMint</p>
                             </div>
                             <div class="tp-caption tp-resizeme text-center button btnwhite-hole pagescroll"
                                 data-x="['left','left','left','center']" data-hoffset="['0','50','0','0']"
@@ -218,24 +219,24 @@
                                 data-whitespace="nowrap" data-type="button" data-transform_idle="o:1;" data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:1500;e:Power4.easeInOut;"
                                 data-transform_out="s:900;e:Power2.easeInOut;s:900;e:Power2.easeInOut;"
                                 data-start="2000" data-splitin="none" data-splitout="none" data-responsive_offset="on">
-                                <a href="#." class="btn btn-blue btn-rounded btn-large">Learn More</a>
+                                <a class="btn btn-blue btn-hvr-white btn-rounded btn-large margin-5px-right participate">Register</a>
+                                <a class="btn btn-transparent-white btn-rounded btn-large details">Details</a>
                             </div>
                         </li>
                     </ul>
-
                 </div>
             </div>
         </section>
         <!--Main Slider ends -->
         <!-- start feature -->
-        <section id="feature" class="how-it-work text-center bg-light-gray no-transition">
+        <section id="details-section" class="how-it-work text-center bg-light-gray no-transition">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-9 text-center center-col last-paragraph-no-margin">
                         <div class="sec-title margin-100px-bottom">
                             <div class="text-large text-red margin-10px-bottom font-weight-400 text-blue">All You Need To Know</div>
                             <h4 class="text-capitalize alt-font text-extra-dark-gray font-weight-300">
-                                Follow below steps to win the contest
+                            Follow below steps to win the contest
                             </h3>
                             <p class="width-75 margin-lr-auto md-width-90 xs-width-100 xs-margin-30px-bottom">
                             </p>
@@ -247,7 +248,7 @@
                     <div class="col-md-4 col-sm-6 col-xs-12">
                         <div class="how-box-one inner-box xs-margin-100px-bottom">
                             <div class="icon-box bg-blue">
-                                <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
                             </div>
                             <div class="text-large text-extra-dark-gray margin-20px-bottom">1. Registration</div>
                             <p>Register yourself for getting started.
@@ -269,7 +270,7 @@
                     <div class="col-md-4 col-sm-12 col-xs-12">
                         <div class="how-box-one inner-box">
                             <div class="icon-box bg-blue">
-                                <i class="fa fa-comments-o" aria-hidden="true"></i>
+                                <i class="fa fa-gift" aria-hidden="true"></i>
                             </div>
                             <div class="text-large text-extra-dark-gray margin-20px-bottom">3. Earn Points</div>
                             <p>Each successfull registration with your reffered link will earn you a point and increase your chance of winning.
@@ -280,8 +281,8 @@
             </div>
         </section>
         <!--end feature -->
-<!-- contact-->
-        <section id="contact" class="btn-version">
+        <!-- contact-->
+        <section id="participate-section" class="btn-version">
             <div class="get-quote-section xs-text-center">
                 <div class="container">
                     <div class="row clearfix">
@@ -289,9 +290,9 @@
                         <div class="col-md-6">
                             <div class="sec-title margin-50px-bottom">
                                 <h3 class="text-capitalize alt-font text-extra-dark-gray font-weight-300">
-                                    Lets Get Started
+                                    Let's Get Started
                                 </h3>
-                                   <img src="images/prize.jpg" style="width: 60%">
+                                <img src="images/prize.jpg" style="width: 60%">
                             </div>
                         </div>
                         <div class="form-column col-md-6 margin-100px-top">
@@ -316,7 +317,7 @@
                                         </div>
                                         <div class="col-sm-4 margin-20px-top">
                                             <div class="form-group">
-<?php require 'countryCodes.php' ?>
+                                                <?php require 'countryCodes.php' ?>
                                             </div>
                                         </div>
                                         <div class="col-sm-8 margin-20px-top">
@@ -337,6 +338,8 @@
                 </div>
             </div>
         </section>
+        <!-- Sweet alert -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
         <!-- javascript libraries -->
         <script src="js/jquery-3.2.1.js"></script>
         <script src="js/bootstrap.min.js"></script>
